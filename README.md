@@ -172,5 +172,15 @@ launchctl bootout gui/$(id -u)/com.santiagoluengas.outreach-engine.daily-push
 launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.santiagoluengas.outreach-engine.daily-push.plist
 ```
 
-Si cambiás la hora, editá el `.plist` **en `~/Library/LaunchAgents/`** y recargalo con
-los dos comandos de arriba; la copia en `scripts/` es solo la versionada.
+### Instalación y cambios
+
+La fuente de verdad es `scripts/daily-push.sh`, pero launchd **no logra ejecutar un
+script guardado dentro de `~/Downloads`** (sale con código 126), así que se copia a
+`~/.local/bin/`. Por eso, después de editar el script o el `.plist`:
+
+```bash
+npm run install-push    # copia ambos a su lugar y recarga launchd
+```
+
+Si editás solo la copia en `~/.local/bin/`, el cambio corre pero no queda versionado
+y el siguiente `install-push` lo sobrescribe.

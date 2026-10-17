@@ -8,7 +8,7 @@
   <key>ProgramArguments</key>
   <array>
     <string>/bin/bash</string>
-    <string>/Users/santiagoluengas/Downloads/Claude Code/outreach-engine/scripts/daily-push.sh</string>
+    <string>/Users/santiagoluengas/.local/bin/outreach-daily-push.sh</string>
   </array>
 
   <!-- 19:00 todos los días. Si el equipo está durmiendo a esa hora,
