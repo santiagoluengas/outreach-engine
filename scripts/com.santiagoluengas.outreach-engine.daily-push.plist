@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.santiagoluengas.outreach-engine.daily-push</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/santiagoluengas/Downloads/Claude Code/outreach-engine/scripts/daily-push.sh</string>
+  </array>
+
+  <!-- 19:00 todos los días. Si el equipo está durmiendo a esa hora,
+       launchd lo corre en cuanto despierta (cron no lo haría). -->
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key><integer>19</integer>
+    <key>Minute</key><integer>0</integer>
+  </dict>
+
+  <key>StandardErrorPath</key>
+  <string>/Users/santiagoluengas/Library/Logs/outreach-engine-daily-push.err.log</string>
+</dict>
+</plist>

@@ -142,3 +142,35 @@ de 8am a 4pm Bogotá, lun-vie.
 - Personalización del paso 1 con LLM a partir de `contexto` (hoy es plantilla + variables).
 - Detección de rebotes duros en Gmail para marcar el correo como inválido.
 - Métricas: tasa de respuesta por paso, por plantilla y por industria.
+
+## Push diario automático
+
+Un agente de launchd corre `scripts/daily-push.sh` todos los días a las **19:00** y
+sube a GitHub lo que haya pendiente en este repo: commitea los cambios sin commitear
+como `wip: <fecha>` y pushea los commits que no estén en `origin`.
+
+**Si no hay nada que subir, no hace nada.** No genera commits vacíos: el gráfico de
+contribuciones refleja trabajo real, no actividad inventada.
+
+Antes de commitear revisa los nombres de los archivos staged y **aborta** si alguno
+tiene pinta de secreto (`.env`, `.pem`, `*secret*`, `*credential*`, `client_secret`).
+Es una red de seguridad sobre el `.gitignore`, porque el script commitea a ciegas.
+
+```bash
+tail -20 ~/Library/Logs/outreach-engine-daily-push.log   # qué hizo cada día
+launchctl print gui/$(id -u)/com.santiagoluengas.outreach-engine.daily-push
+```
+
+Operación:
+
+```bash
+# Correrlo ahora, tal como lo correría launchd
+launchctl kickstart -k gui/$(id -u)/com.santiagoluengas.outreach-engine.daily-push
+
+# Desactivarlo / reactivarlo
+launchctl bootout gui/$(id -u)/com.santiagoluengas.outreach-engine.daily-push
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.santiagoluengas.outreach-engine.daily-push.plist
+```
+
+Si cambiás la hora, editá el `.plist` **en `~/Library/LaunchAgents/`** y recargalo con
+los dos comandos de arriba; la copia en `scripts/` es solo la versionada.
