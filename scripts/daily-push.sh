@@ -42,6 +42,17 @@ if [ -n "$(git status --porcelain)" ]; then
     exit 1
   fi
 
+  # Un commit cuyo autor no esté vinculado a la cuenta de GitHub no cuenta como
+  # contribución, y falla en silencio: aparece en el repo pero no en el perfil.
+  # Pasó con los primeros commits de este repo, así que queda avisado en el log.
+  autor="$(git var GIT_AUTHOR_IDENT 2>/dev/null | sed 's/ [0-9]* [+-][0-9]*$//')"
+  case "$autor" in
+    ""|*@*.local*|*@*.lan*)
+      log "OJO: autor '$autor' no vinculado a GitHub; el commit NO va a contar como contribución" ;;
+    *)
+      log "autor: $autor" ;;
+  esac
+
   # Fecha de Bogotá, no del sistema: el Mac está en America/Los_Angeles y de noche
   # ya es el día siguiente en Colombia, lo que dejaría el wip sellado un día antes.
   if git commit -q -m "wip: $(TZ=America/Bogota date '+%Y-%m-%d')"; then

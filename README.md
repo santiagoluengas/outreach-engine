@@ -152,7 +152,11 @@ como `wip: <fecha>` y pushea los commits que no estén en `origin`.
 **Horario: 17:00 en hora del sistema.** Este Mac está en `America/Los_Angeles`, así
 que esas 17:00 son las **19:00 de Bogotá**, que es la hora real que se buscaba. Si
 cambiás la zona horaria del equipo, el `Hour` del `.plist` queda desfasado y hay que
-recalcularlo. Por el mismo motivo el commit `wip:` se sella con la fecha de Bogotá y no
+recalcularlo.
+
+> **Se desfasa solo con el horario de verano.** Los Ángeles cambia de hora, Bogotá no.
+> Cuando el Pacífico pase a PST (primer domingo de noviembre), esas 17:00 pasan a ser
+> las 20:00 de Bogotá y hay que mover el `Hour` a 16. En marzo, de vuelta a 17. Por el mismo motivo el commit `wip:` se sella con la fecha de Bogotá y no
 con la del sistema.
 
 **Si no hay nada que subir, no hace nada.** No genera commits vacíos: el gráfico de
