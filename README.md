@@ -178,6 +178,21 @@ launchctl bootout gui/$(id -u)/com.santiagoluengas.outreach-engine.daily-push
 launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.santiagoluengas.outreach-engine.daily-push.plist
 ```
 
+### Identidad de git
+
+Para que los commits cuenten como contribuciones en GitHub, el email del autor tiene
+que estar vinculado a la cuenta. Sin `user.email` configurado, git lo inventa desde el
+hostname del Mac (`santiagoluengas@mac.lan`) y GitHub los descarta en silencio: el
+commit aparece en el repo pero no en el perfil.
+
+Configurado globalmente con la dirección `noreply` de GitHub, que siempre atribuye y no
+expone un email real si el repo se hace público:
+
+```bash
+git config --global user.email "114884733+santiagoluengas@users.noreply.github.com"
+git var GIT_AUTHOR_IDENT   # verificar
+```
+
 ### Instalación y cambios
 
 La fuente de verdad es `scripts/daily-push.sh`, pero launchd **no logra ejecutar un
