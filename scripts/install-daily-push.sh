@@ -25,7 +25,7 @@ echo "plist   -> ~/Library/LaunchAgents/$LABEL.plist"
 
 launchctl bootout "gui/$(id -u)/$LABEL" 2>/dev/null || true
 launchctl bootstrap "gui/$(id -u)" "$HOME/Library/LaunchAgents/$LABEL.plist"
-echo "launchd -> cargado, corre todos los días a las 19:00"
+echo "launchd -> cargado (17:00 del sistema = 19:00 de Bogotá)"
 echo
 echo "Probarlo ahora:  launchctl kickstart -k gui/$(id -u)/$LABEL"
 echo "Ver qué hizo:    tail -20 ~/Library/Logs/outreach-engine-daily-push.log"

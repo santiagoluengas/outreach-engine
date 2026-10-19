@@ -1,6 +1,6 @@
 #!/bin/bash
 # Sube a GitHub el trabajo real pendiente de este repo. Lo corre launchd cada día
-# a las 19:00 (ver scripts/com.santiagoluengas.outreach-engine.daily-push.plist).
+# a las 19:00 de Bogotá (17:00 en hora del sistema, que está en Los Ángeles) (ver scripts/com.santiagoluengas.outreach-engine.daily-push.plist).
 #
 # Si no hay nada que subir, no hace nada: nunca genera commits vacíos.
 #
@@ -42,7 +42,9 @@ if [ -n "$(git status --porcelain)" ]; then
     exit 1
   fi
 
-  if git commit -q -m "wip: $(date '+%Y-%m-%d')"; then
+  # Fecha de Bogotá, no del sistema: el Mac está en America/Los_Angeles y de noche
+  # ya es el día siguiente en Colombia, lo que dejaría el wip sellado un día antes.
+  if git commit -q -m "wip: $(TZ=America/Bogota date '+%Y-%m-%d')"; then
     log "commit wip creado en $rama"
   else
     log "ERROR: falló el commit"

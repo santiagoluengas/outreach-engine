@@ -145,9 +145,15 @@ de 8am a 4pm Bogotá, lun-vie.
 
 ## Push diario automático
 
-Un agente de launchd corre `scripts/daily-push.sh` todos los días a las **19:00** y
-sube a GitHub lo que haya pendiente en este repo: commitea los cambios sin commitear
+Un agente de launchd corre `scripts/daily-push.sh` una vez al día y sube a GitHub lo
+que haya pendiente en este repo: commitea los cambios sin commitear
 como `wip: <fecha>` y pushea los commits que no estén en `origin`.
+
+**Horario: 17:00 en hora del sistema.** Este Mac está en `America/Los_Angeles`, así
+que esas 17:00 son las **19:00 de Bogotá**, que es la hora real que se buscaba. Si
+cambiás la zona horaria del equipo, el `Hour` del `.plist` queda desfasado y hay que
+recalcularlo. Por el mismo motivo el commit `wip:` se sella con la fecha de Bogotá y no
+con la del sistema.
 
 **Si no hay nada que subir, no hace nada.** No genera commits vacíos: el gráfico de
 contribuciones refleja trabajo real, no actividad inventada.

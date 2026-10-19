@@ -11,11 +11,13 @@
     <string>/Users/santiagoluengas/.local/bin/outreach-daily-push.sh</string>
   </array>
 
-  <!-- 19:00 todos los días. Si el equipo está durmiendo a esa hora,
-       launchd lo corre en cuanto despierta (cron no lo haría). -->
+  <!-- 17:00 en hora DEL SISTEMA, que está en America/Los_Angeles: equivale a las
+       19:00 en Bogotá, que es la hora que Santi quiere. Si cambia la zona del Mac,
+       hay que recalcular este número.
+       Si el equipo duerme a esa hora, launchd lo corre al despertar (cron no lo haría). -->
   <key>StartCalendarInterval</key>
   <dict>
-    <key>Hour</key><integer>19</integer>
+    <key>Hour</key><integer>17</integer>
     <key>Minute</key><integer>0</integer>
   </dict>
 
